@@ -14,6 +14,40 @@ public final class LinkedStack<T> implements StackInterface<T>
    } // end default constructor
   
 //  < Implementations of the stack operations go here. >
+
+   public void push(T newEntry)
+   {
+      Node newNode = new Node(newEntry, topNode);
+      topNode = newNode;
+   } // end push
+
+   public T pop()
+   {
+      T top = peek();  // Might throw EmptyStackException
+
+      // Assertion: topNode != null
+      topNode = topNode.getNextNode();
+
+      return top;
+   } // end pop
+
+   public T peek()
+   {
+      if (isEmpty())
+         throw new EmptyStackException();
+      else
+         return topNode.getData();
+   } // end peek
+
+   public boolean isEmpty()
+   {
+      return topNode == null;
+   } // end isEmpty
+
+   public void clear()
+   {
+      topNode = null;
+   } // end clear
 //  . . .
 
 	private class Node
