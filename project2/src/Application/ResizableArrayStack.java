@@ -4,6 +4,7 @@
     @version 5.0
 */
 import java.util.Arrays;
+import java.util.EmptyStackException;
 public final class ResizableArrayStack<T> implements StackInterface<T>
 {
 	private T[] stack;    // Array of stack entries
@@ -53,6 +54,34 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
          return top;
       } // end if
    } // end pop
+
+   public T peek()
+   {
+      checkIntegrity();
+      if (isEmpty()){
+         throw new EmptyStackException();
+      }
+      else{
+         return stack[topIndex];
+      }
+   } // end peek
+
+   public boolean isEmpty()
+   {
+      return topIndex < 0;
+   } // end isEmpty
+
+   public void clear(){
+      checkIntegrity();
+
+      //Remove references to the objects in the stack,
+      //but do not deallocate the array
+      while (topIndex > -1){
+         stack[topIndex] = null;
+         topIndex--;
+      }//end while
+      //Assertion: topIndex is -1
+   }//end clear
 //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
 
    private void ensureCapacity(){
@@ -72,7 +101,7 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
                                             "maximum of " + MAX_CAPACITY);
       } // end checkCapacity
 
-      private void checkIntegrity()
+   private void checkIntegrity()
       {
          if (!integrityOK)
             throw new SecurityException("ResizableArrayStack object is corrupt.");
