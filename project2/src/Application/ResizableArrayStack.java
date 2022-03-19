@@ -3,7 +3,8 @@
     @author Frank M. Carrano and Timothy M. Henry
     @version 5.0
 */
-public final class ArrayStack<T> implements StackInterface<T>
+import java.util.Arrays;
+public final class ResizableArrayStack<T> implements StackInterface<T>
 {
 	private T[] stack;    // Array of stack entries
 	private int topIndex; // Index of top entry
@@ -11,12 +12,12 @@ public final class ArrayStack<T> implements StackInterface<T>
 	private static final int DEFAULT_CAPACITY = 50;
 	private static final int MAX_CAPACITY = 10000;
   
-   public ArrayStack()
+   public ResizableArrayStack()
    {
       this(DEFAULT_CAPACITY);
    } // end default constructor
   
-   public ArrayStack(int initialCapacity)
+   public ResizableArrayStack(int initialCapacity)
    {
       integrityOK = false;
       checkCapacity(initialCapacity);
@@ -30,7 +31,52 @@ public final class ArrayStack<T> implements StackInterface<T>
   } // end constructor
   
 //  < Implementations of the stack operations go here. >
+   public void push(T newEntry)
+   {
+      checkIntegrity();
+      ensureCapacity();
+      stack[topIndex + 1] = newEntry;
+      topIndex++;
+   } // end push
+
+   public T pop()
+   {
+      checkIntegrity();
+      if (isEmpty()){
+         throw new EmptyStackException();
+      }
+      else
+      {
+         T top = stack[topIndex];
+         stack[topIndex] = null;
+         topIndex--;
+         return top;
+      } // end if
+   } // end pop
 //  < Implementations of the private methods go here; checkCapacity and checkIntegrity
+
+   private void ensureCapacity(){
+      if (topIndex >= stack.length - 1)//If array is full, double its size
+      {
+         int newLength = 2 * stack.length;
+         checkCapacity(newLength);
+         stack = Arrays.copyOf(stack, newLength);
+      }//end if
+   }//end ensureCapacity
+
+   private void checkCapacity(int capacity)
+      {
+         if (capacity > MAX_CAPACITY)
+            throw new IllegalStateException("Attempt to create a bag whose " +
+                                            "capacity exeeds allowed " +
+                                            "maximum of " + MAX_CAPACITY);
+      } // end checkCapacity
+
+      private void checkIntegrity()
+      {
+         if (!integrityOK)
+            throw new SecurityException("ResizableArrayStack object is corrupt.");
+      } // end checkIntegrity
 //    are analogous to those in Chapter 2. >
 //  . . .
 } // end ArrayStack

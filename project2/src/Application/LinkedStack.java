@@ -33,10 +33,12 @@ public final class LinkedStack<T> implements StackInterface<T>
 
    public T peek()
    {
-      if (isEmpty())
+      if (isEmpty()){
          throw new EmptyStackException();
-      else
+      }
+      else{
          return topNode.getData();
+      }
    } // end peek
 
    public boolean isEmpty()
