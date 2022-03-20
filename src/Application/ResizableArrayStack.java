@@ -1,3 +1,5 @@
+package Application;
+
 /**
     A class of stacks whose entries are stored in an array.
     @author Frank M. Carrano and Timothy M. Henry
