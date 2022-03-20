@@ -1,9 +1,8 @@
-import static org.junit.Assert.assertEquals;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class CalculatorTest{
     @Test
-    public void testconvertToPostfix(){
-        assertEquals("ab*ca-/de*+", convertToPostfix(y));
+    void testconvertToPostfix(){
+        assertEquals("ab*ca-/de*+", Calculator.evaluatePostfix("a*b/(c-a)+d*e"));
     }
 }
