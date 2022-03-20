@@ -6,8 +6,12 @@ public class Calculator{
     public static int a = 2;
     public static void main(String args[]){
         String y = "a*b/(c-a)+d*e";
+        String q = "a/b*(c+(d-e))";
+        String m = "a-b+c";
         //should return ab*ca-/de*+
-        //System.out.println(convertToPostfix(y));
+        System.out.println(convertToPostfix(y));
+        System.out.println(convertToPostfix(q));
+        System.out.println(convertToPostfix(m));
 /*
         int a = 2;
         int b = 3;
@@ -15,7 +19,7 @@ public class Calculator{
         int d = 5;
         int e = 6; */
         
-        System.out.println(evaluatePostfix(convertToPostfix(y)));
+        //System.out.println(evaluatePostfix(convertToPostfix(y)));
     }
 /*
     public static String testing(String x){
@@ -33,7 +37,7 @@ public class Calculator{
             Character nextCharacter = infix.charAt(i);
             if (Character.isLetter(nextCharacter)){
                 postfix += Character.toString(nextCharacter);
-                System.out.println("it is a letter");
+                //System.out.println("it is a letter");
             }
             else if (nextCharacter.equals('^')){
                 operatorStack.push(nextCharacter);
@@ -41,7 +45,7 @@ public class Calculator{
 
             
             else if(nextCharacter.equals('+') || nextCharacter.equals('-') || nextCharacter.equals('*') || nextCharacter.equals('/')){
-                System.out.println("it is an operator");
+                //System.out.println("it is an operator");
                 while (!operatorStack.isEmpty() && getPrecedence(nextCharacter) <= getPrecedence(operatorStack.peek())){ // (see getPrecedence) user input gets sanitized here. while loop will not execute if nextCharacter is not +, -, *, /, ^
                     postfix += Character.toString(operatorStack.peek());
                     operatorStack.pop();
