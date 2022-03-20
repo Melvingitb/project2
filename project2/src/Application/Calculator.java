@@ -1,4 +1,4 @@
-import java.util.Stack;
+import java.lang.Math;
 
 public class Calculator{
 
@@ -89,18 +89,19 @@ public class Calculator{
                     case '+': valueStack.push(operandOne + operandTwo);
                         break;
                     //subtraction operator
-                    case '-': valueStack.push(operandTwo - operandOne);
+                    case '-': valueStack.push(operandOne - operandTwo);
                         break;
                     //multiplication operator
                     case '*': valueStack.push(operandOne * operandTwo);
                         break;
                     //division operator
-                    case '/': valueStack.push(operandTwo / operandOne);
+                    case '/': valueStack.push(operandOne / operandTwo);
                         break;
-
+                    //exponential operator
+                    case '^': valueStack.push((int)Math.pow(operandOne, operandTwo));
                     default:
-                            valueStack.push(operandOne);
                             valueStack.push(operandTwo);
+                            valueStack.push(operandOne);
                         break;
 
 
@@ -124,7 +125,6 @@ public class Calculator{
             //return 3;}
           else { //Should never get to this else statement because input is already sanitized inside convertToPostfix
             throw new IllegalArgumentException("Operator unknown: " + x);
-            //return 9999;
         }
     } //end getPrecedence
 
