@@ -5,11 +5,8 @@ import Application.Calculator;
 import static org.junit.Assert.assertEquals;
 
 public class CalculatorTest{
-    //Calculator tester = new Calculator();
     @Test
     void testconvertToPostfix(){
-        //String q = "a/b*(c+(d-e))";
-        //String m = "a-b+c";
         String expected = "abca-/de+";
         String actual = Calculator.convertToPostfix("ab/(c-a)+de");
         assertEquals(expected, actual);
