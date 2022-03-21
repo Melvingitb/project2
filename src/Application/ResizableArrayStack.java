@@ -33,7 +33,11 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       integrityOK = true;
   } // end constructor
   
-//  < Implementations of the stack operations go here. >
+
+   /** 
+   * Adds a value to the top of the stack.
+   * @param newEntry New value to be placed on the stack.
+   */
    public void push(T newEntry)
    {
       checkIntegrity();
@@ -42,6 +46,11 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       topIndex++;
    } // end push
 
+   
+   /** 
+    * Removes a value from the top of the stack.
+    * @return top, The top value of the stack.
+    */
    public T pop()
    {
       checkIntegrity();
@@ -57,6 +66,12 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       } // end if
    } // end pop
 
+   
+   /** 
+    * Looks at the top value of the stack.
+    * @return T, top value of the stack.
+    * @throws EmptyStackException() if stack is empty.
+    */
    public T peek()
    {
       checkIntegrity();
@@ -68,11 +83,19 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       }
    } // end peek
 
+   
+   /** 
+    * Determines if stack is empty or not.
+    * @return isEmpty(), true if stack is empty.
+    */
    public boolean isEmpty()
    {
       return topIndex < 0;
    } // end isEmpty
 
+   /** 
+    * Removes all values from a stack.
+    */
    public void clear(){
       checkIntegrity();
 
@@ -84,8 +107,10 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       }//end while
       //Assertion: topIndex is -1
    }//end clear
-//  < Implementations of the private methods go here; checkCapacity and checkIntegrity
 
+   /** 
+    * Resizes stack if needed.
+    */
    private void ensureCapacity(){
       if (topIndex >= stack.length - 1)//If array is full, double its size
       {
@@ -95,6 +120,12 @@ public final class ResizableArrayStack<T> implements StackInterface<T>
       }//end if
    }//end ensureCapacity
 
+   
+   /** 
+    * Checks if new resized capacity exceeds allowed capacity.
+    * @param capacity   Desired capacity when ensureCapacity tries to resize.
+      @throws IllegalStateException() if capacity exceeds allowed capacity.
+    */
    private void checkCapacity(int capacity)
       {
          if (capacity > MAX_CAPACITY)

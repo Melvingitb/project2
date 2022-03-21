@@ -3,6 +3,10 @@ import java.lang.Math;
 
 public class Calculator{
 
+    
+    /** 
+     * @param args[]
+     */
     public static void main(String args[]){
         String y = "a*b/(c-a)+d*e";
         String q = "a/b*(c+(d-e))";
@@ -11,6 +15,7 @@ public class Calculator{
         System.out.println(convertToPostfix(y));
         System.out.println(convertToPostfix(q));
         System.out.println(convertToPostfix(m));
+
         /*
         a = 2;
         b = 3;
@@ -21,6 +26,12 @@ public class Calculator{
         System.out.println(evaluatePostfix("23*42-/56*+"));
     }
 
+    
+    /** 
+     * Converts an infix expression to a postfix expression.
+     * @param infix     An infix expression.
+     * @return postfix  The postfix expression derived from infix.
+     */
     public static String convertToPostfix(String infix){
         //Converts an infix expression to an equivalent postfix expression.
         LinkedStack<Character> operatorStack = new LinkedStack<>();
@@ -68,6 +79,12 @@ public class Calculator{
         return postfix;
     } //end convertToPostfix
 
+    
+    /** 
+     * Evaluates a postfix expression, provided that all variables in the postfix expression are replaced by their respective values (E.g. ab*ca-/de*+ would be 23*42-/56*).
+     * @param postfix               Postfix expression where all variables are replaced by their respective values.
+     * @return valueStack.peek();   The top value of valueStack.  
+     */
     public static int evaluatePostfix(String postfix){
         
         ResizableArrayStack<Integer> valueStack = new ResizableArrayStack<>();
@@ -124,6 +141,13 @@ public class Calculator{
 
     } // end evaluatePostfix
 
+    
+    /** 
+     * Retrieves precedence values for respective operand.
+     * @param x     The operand.
+     * @return int  The precedence value.
+     * @throws IllegalArgumentException if the operator is unknown.
+     */
     private static int getPrecedence(Character x){
                if (x.equals('+') || x.equals('-')){
             return 1;
@@ -131,12 +155,9 @@ public class Calculator{
             return 2;
         } else if (x.equals('(')){
             return 0;
-        }
-         //else if (x.equals('^')){
-            //return 3;}
-          else { //Should never get to this else statement because input is already sanitized inside convertToPostfix
+        } else { //Should never get to this else statement because input is already sanitized inside convertToPostfix
             throw new IllegalArgumentException("Operator unknown: " + x);
         }
     } //end getPrecedence
 
-}
+} //end class Calculator

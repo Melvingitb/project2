@@ -15,14 +15,22 @@ public final class LinkedStack<T> implements StackInterface<T>
       topNode = null;
    } // end default constructor
   
-//  < Implementations of the stack operations go here. >
 
+   /** 
+   * Adds a value to the top of the stack.
+   * @param newEntry New value to be placed on the stack.
+   */
    public void push(T newEntry)
    {
       Node newNode = new Node(newEntry, topNode);
       topNode = newNode;
    } // end push
 
+   
+   /** 
+    * Removes a value from the top of the stack.
+    * @return top, The top value of the stack.
+    */
    public T pop()
    {
       T top = peek();  // Might throw EmptyStackException
@@ -33,6 +41,12 @@ public final class LinkedStack<T> implements StackInterface<T>
       return top;
    } // end pop
 
+   
+   /** 
+    * Looks at the top value of the stack.
+    * @return T, top value of the stack.
+    * @throws EmptyStackException() if stack is empty.
+    */
    public T peek()
    {
       if (isEmpty()){
@@ -43,11 +57,19 @@ public final class LinkedStack<T> implements StackInterface<T>
       }
    } // end peek
 
+   
+   /** 
+    * Determines if stack is empty or not.
+    * @return isEmpty(), true if stack is empty.
+    */
    public boolean isEmpty()
    {
       return topNode == null;
    } // end isEmpty
 
+   /** 
+    * Removes all values from a stack.
+    */
    public void clear()
    {
       topNode = null;
