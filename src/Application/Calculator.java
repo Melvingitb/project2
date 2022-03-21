@@ -11,7 +11,9 @@ public class Calculator{
     public static void main(String args[]){
 
         String infix1 = "a*b/(c-a)+d*e";
-        System.out.println("The infix expression to be converted to postfix is: " + infix1 + "\nThe resulting postfix expression is: " + convertToPostfix(infix1) + "\n"); //returns ab*ca-/de*+
+        System.out.println("The infix expression to be converted to postfix is: " 
+                             + infix1 + "\nThe resulting postfix expression is: " 
+                             + convertToPostfix(infix1) + "\n"); //returns ab*ca-/de*+
 
         
         /*For below print statement:
@@ -25,10 +27,14 @@ public class Calculator{
         
 
         String postfix1 = "23*42-/56*+";
-        System.out.println("The postfix expression to be evaluated is: " + postfix1 + " , where" + "\na = a, b = 3," +"\nc = 4, d = 5," + "\ne = 6\nThe evaluated postfix with these respective values is: "+ evaluatePostfix(postfix1)); //returns 33
+        System.out.println("The postfix expression to be evaluated is: " 
+                            + postfix1 + " , where" + 
+                            "\na = 2, b = 3," + 
+                            "\nc = 4, d = 5," + 
+                            "\ne = 6\nThe evaluated postfix with these respective values is: " + 
+                            evaluatePostfix(postfix1)); //returns 33
     }
 
-    
     /** 
      * Converts an infix expression to a postfix expression.
      * @param infix     An infix expression.
@@ -52,7 +58,11 @@ public class Calculator{
             
             else if(nextCharacter.equals('+') || nextCharacter.equals('-') || nextCharacter.equals('*') || nextCharacter.equals('/')){
                 //System.out.println("it is an operator");
-                while (!operatorStack.isEmpty() && getPrecedence(nextCharacter) <= getPrecedence(operatorStack.peek())){ // (see getPrecedence) user input gets sanitized here. while loop will not execute if nextCharacter is not +, -, *, /, ^
+                while (!operatorStack.isEmpty() && getPrecedence(nextCharacter) <= getPrecedence(operatorStack.peek())){ 
+                    
+                    // (see getPrecedence) user input gets sanitized here. 
+                    // while loop will not execute if nextCharacter is not +, -, *, /, ^
+                    
                     postfix += Character.toString(operatorStack.peek());
                     operatorStack.pop();
                 }
