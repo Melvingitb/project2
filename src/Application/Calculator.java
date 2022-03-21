@@ -5,25 +5,27 @@ public class Calculator{
 
     
     /** 
+     * Main method for running postfix conversion and evaluation.
      * @param args[]
      */
     public static void main(String args[]){
-        String y = "a*b/(c-a)+d*e";
-        String q = "a/b*(c+(d-e))";
-        String m = "a-b+c";
-        //should return ab*ca-/de*+
-        System.out.println(convertToPostfix(y));
-        System.out.println(convertToPostfix(q));
-        System.out.println(convertToPostfix(m));
 
-        /*
-        a = 2;
-        b = 3;
-        c = 4;
-        d = 5;
-        e = 6; */
+        String infix1 = "a*b/(c-a)+d*e";
+        System.out.println("The infix expression to be converted to postfix is: " + infix1 + "\nThe resulting postfix expression is: " + convertToPostfix(infix1) + "\n"); //returns ab*ca-/de*+
+
         
-        System.out.println(evaluatePostfix("23*42-/56*+"));
+        /*For below print statement:
+            a = 2;
+            b = 3;
+            c = 4;
+            d = 5;
+            e = 6;
+        for infix expression ab*ca-/de*+
+        */
+        
+
+        String postfix1 = "23*42-/56*+";
+        System.out.println("The postfix expression to be evaluated is: " + postfix1 + " , where" + "\na = a, b = 3," +"\nc = 4, d = 5," + "\ne = 6\nThe evaluated postfix with these respective values is: "+ evaluatePostfix(postfix1)); //returns 33
     }
 
     
