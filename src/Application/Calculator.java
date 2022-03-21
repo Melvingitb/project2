@@ -3,7 +3,6 @@ import java.lang.Math;
 
 public class Calculator{
 
-    public static int a = 2;
     public static void main(String args[]){
         String y = "a*b/(c-a)+d*e";
         String q = "a/b*(c+(d-e))";
@@ -12,21 +11,15 @@ public class Calculator{
         System.out.println(convertToPostfix(y));
         System.out.println(convertToPostfix(q));
         System.out.println(convertToPostfix(m));
-/*
-        int a = 2;
-        int b = 3;
-        int c = 4;
-        int d = 5;
-        int e = 6; */
+        /*
+        a = 2;
+        b = 3;
+        c = 4;
+        d = 5;
+        e = 6; */
         
-        //System.out.println(evaluatePostfix(convertToPostfix(y)));
+        System.out.println(evaluatePostfix("23*42-/56*+"));
     }
-/*
-    public static String testing(String x){
-        System.out.println(x);
-        return x;
-        //System.out.println(x);
-    } */
 
     public static String convertToPostfix(String infix){
         //Converts an infix expression to an equivalent postfix expression.
@@ -83,30 +76,43 @@ public class Calculator{
             Character nextCharacter = postfix.charAt(i);
                    if(nextCharacter.equals(" ")){
                 i++;
-            } else if(Character.isLetter(nextCharacter)){
-                valueStack.push((int)nextCharacter);
+            } else if(Character.isDigit(nextCharacter)){
+                valueStack.push(nextCharacter - '0');
             } else {
-                int operandOne = valueStack.pop();
-                int operandTwo = valueStack.pop();
+                int operandOne;
+                int operandTwo;
 
                 switch(nextCharacter){
                     //addition operator
-                    case '+': valueStack.push(operandOne + operandTwo);
+                    case '+': 
+                        operandTwo = valueStack.pop();
+                        operandOne = valueStack.pop();
+                        valueStack.push(operandOne + operandTwo);
                         break;
                     //subtraction operator
-                    case '-': valueStack.push(operandOne - operandTwo);
+                    case '-': 
+                        operandTwo = valueStack.pop();
+                        operandOne = valueStack.pop();
+                        valueStack.push(operandOne - operandTwo);
                         break;
                     //multiplication operator
-                    case '*': valueStack.push(operandOne * operandTwo);
+                    case '*': 
+                        operandTwo = valueStack.pop();
+                        operandOne = valueStack.pop();
+                        valueStack.push(operandOne * operandTwo);
                         break;
                     //division operator
-                    case '/': valueStack.push(operandOne / operandTwo);
+                    case '/':
+                        operandTwo = valueStack.pop();
+                        operandOne = valueStack.pop();
+                        valueStack.push((int)(operandOne / operandTwo));
                         break;
                     //exponential operator
-                    case '^': valueStack.push((int)Math.pow(operandOne, operandTwo));
+                    case '^':
+                        operandTwo = valueStack.pop();
+                        operandOne = valueStack.pop();
+                        valueStack.push((int)Math.pow(operandOne, operandTwo));
                     default:
-                            valueStack.push(operandTwo);
-                            valueStack.push(operandOne);
                         break;
 
 
